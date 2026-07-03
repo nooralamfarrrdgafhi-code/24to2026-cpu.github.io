@@ -24,7 +24,6 @@
             color: #2d4030;
         }
 
-        /* Perfect Center Layout for Header */
         .header-section {
             display: flex;
             flex-direction: column;
@@ -36,16 +35,15 @@
             width: 100%;
         }
 
-        /* Referencing image 1000022749.webp with precise centering and visibility */
         .app-logo {
             width: 80px;
             height: 80px;
             object-fit: contain;
             display: block;
-            margin: 0 auto 12px auto; /* Keeps it exactly in the center */
-            background: black; /* Essential for screen blend to mask out the black area properly */
+            margin: 0 auto 12px auto;
+            background: black;
             border-radius: 16px;
-            mix-blend-mode: screen; /* Removes the black background cleanly */
+            mix-blend-mode: screen;
             filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.3));
         }
 
@@ -61,7 +59,6 @@
             margin-top: 5px;
         }
 
-        /* Neumorphic Card Styling */
         .card {
             background: #f0f4f8;
             border-radius: 25px;
@@ -91,7 +88,6 @@
             font-weight: bold;
         }
 
-        /* Top Box Layout */
         .live-info-line1 {
             font-size: 18px;
             font-weight: 600;
@@ -106,7 +102,6 @@
             letter-spacing: 1px;
         }
 
-        /* Bottom Box Layout */
         .input-wrapper {
             position: relative;
             margin-bottom: 20px;
@@ -200,8 +195,8 @@
 
     <!-- Header Section -->
     <div class="header-section">
-        <!-- Image 1000022749.webp centered perfectly above the name -->
-        <img src="1000022749.webp" alt="Logo" class="app-logo">
+        <!-- Automatically pulling your uploaded image -->
+        <img src="IMG_20260511_14" alt="Logo" class="app-logo" onerror="this.src='1000022749.webp'">
         <div class="title">Noor Alam 2.06.13123.044</div>
         <div class="subtitle">🌹 #43615.012</div>
     </div>
@@ -241,23 +236,18 @@
         </div>
     </div>
 
-    <!-- Footer Credit -->
     <div class="footer-text">DESIGNED BY NOOR ALAM</div>
 
     <script>
-        // Live Clock and Today's Date Function
         function updateLiveClock() {
             const now = new Date();
-            
-            // Date and Day Format
             const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            const dateStr = now.toLocaleDateString('en-GB', options); // DD/MM/YYYY
+            const dateStr = now.toLocaleDateString('en-GB', options);
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const dayStr = dayNames[now.getDay()];
 
             document.getElementById('live-date-info').innerText = `${dateStr} | ${dayStr}`;
 
-            // Live Time format AM/PM
             let hours = now.getHours();
             let minutes = now.getMinutes();
             let seconds = now.getSeconds();
@@ -275,7 +265,6 @@
         setInterval(updateLiveClock, 1000);
         updateLiveClock();
 
-        // Plus/Minus Date Calculator Logic
         document.getElementById('day-input').addEventListener('input', function(e) {
             const val = e.target.value.trim();
             const resultSpan = document.getElementById('result-text');
@@ -301,7 +290,6 @@
 
             const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
             const finalDateStr = targetDate.toLocaleDateString('en-GB', options);
-            
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const finalDayStr = dayNames[targetDate.getDay()];
             
