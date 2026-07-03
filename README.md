@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noor Alam Date Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            color: #2d4030;
+        }
+
+        /* Perfect Center Layout for Header */
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 25px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Referencing image 1000022749.webp with precise centering and visibility */
+        .app-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 12px auto; /* Keeps it exactly in the center */
+            background: black; /* Essential for screen blend to mask out the black area properly */
+            border-radius: 16px;
+            mix-blend-mode: screen; /* Removes the black background cleanly */
+            filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.3));
+        }
+
+        .title {
+            font-size: 24px;
+            color: #0b3c26;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Neumorphic Card Styling */
+        .card {
+            background: #f0f4f8;
+            border-radius: 25px;
+            box-shadow: 9px 9px 16px #d1d9e6, -9px -9px 16px #ffffff;
+            width: 100%;
+            max-width: 380px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            background: #ffffff;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff;
+            font-weight: bold;
+        }
+
+        /* Top Box Layout */
+        .live-info-line1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a3020;
+            margin-bottom: 8px;
+        }
+
+        .live-info-line2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2b5c43;
+            letter-spacing: 1px;
+        }
+
+        /* Bottom Box Layout */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .num-input {
+            width: 100%;
+            background: #f0f4f8;
+            border: none;
+            border-bottom: 2px solid #d1d9e6;
+            padding: 10px 5px;
+            font-size: 18px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .num-input:focus {
+            border-bottom-color: #2b5c43;
+        }
+
+        .num-input::placeholder {
+            color: #999;
+        }
+
+        .action-buttons {
+            position: absolute;
+            right: 0;
+            top: 5px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-mini {
+            background: #f0f4f8;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            box-shadow: 3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff;
+            cursor: pointer;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .btn-mini:active {
+            box-shadow: inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
+        }
+
+        .arrow-divider {
+            text-align: center;
+            color: #d1d9e6;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .result-display {
+            font-size: 19px;
+            font-weight: 600;
+            color: #1a3020;
+            min-height: 40px;
+            padding-top: 10px;
+            border-bottom: 2px solid #2b5c43;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #4a6355;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <!-- Image 1000022749.webp centered perfectly above the name -->
+        <img src="1000022749.webp" alt="Logo" class="app-logo">
+        <div class="title">Noor Alam 2.06.13123.044</div>
+        <div class="subtitle">🌹 #43615.012</div>
+    </div>
+
+    <!-- Top Card: Live Calendar & Time -->
+    <div class="card">
+        <div class="card-header">
+            <div class="icon-box"><i class="fa-solid fa-calendar-days"></i></div>
+            <span>Today's Calendar</span>
+        </div>
+        <div class="live-info-line1" id="live-date-info">Loading...</div>
+        <div class="live-info-line2" id="live-time">00:00:00 AM</div>
+    </div>
+
+    <!-- Bottom Card: Smart Date Calculator -->
+    <div class="card">
+        <div class="card-header">
+            <div class="icon-box"><i class="fa-solid fa-calculator"></i></div>
+            <span>Find Date (e.g., +5 or -4)</span>
+        </div>
+        
+        <div class="input-wrapper">
+            <input type="text" id="day-input" class="num-input" placeholder="Type number with + or - ...">
+            <div class="action-buttons">
+                <button class="btn-mini" onclick="clearInput()"><i class="fa-solid fa-trash"></i></button>
+                <button class="btn-mini" onclick="clearInput()"><i class="fa-solid fa-rotate-left"></i></button>
+            </div>
+        </div>
+
+        <div class="arrow-divider">
+            <i class="fa-solid fa-angle-down"></i><i class="fa-solid fa-angle-down"></i>
+        </div>
+
+        <div class="result-display">
+            <span id="result-text">--</span>
+            <button class="copy-btn" onclick="copyResult()"><i class="fa-regular fa-copy"></i></button>
+        </div>
+    </div>
+
+    <!-- Footer Credit -->
+    <div class="footer-text">DESIGNED BY NOOR ALAM</div>
+
+    <script>
+        // Live Clock and Today's Date Function
+        function updateLiveClock() {
+            const now = new Date();
+            
+            // Date and Day Format
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const dateStr = now.toLocaleDateString('en-GB', options); // DD/MM/YYYY
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayStr = dayNames[now.getDay()];
+
+            document.getElementById('live-date-info').innerText = `${dateStr} | ${dayStr}`;
+
+            // Live Time format AM/PM
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            hours = hours < 10 ? '0' + hours : hours;
+
+            document.getElementById('live-time').innerText = `${hours}:${minutes}:${seconds} ${ampm}`;
+        }
+
+        setInterval(updateLiveClock, 1000);
+        updateLiveClock();
+
+        // Plus/Minus Date Calculator Logic
+        document.getElementById('day-input').addEventListener('input', function(e) {
+            const val = e.target.value.trim();
+            const resultSpan = document.getElementById('result-text');
+
+            if (!val) {
+                resultSpan.innerText = "--";
+                return;
+            }
+
+            if (!val.startsWith('+') && !val.startsWith('-')) {
+                resultSpan.innerText = "Please use + or - prefix";
+                return;
+            }
+
+            const daysOffset = parseInt(val);
+            if (isNaN(daysOffset)) {
+                resultSpan.innerText = "Invalid number";
+                return;
+            }
+
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + daysOffset);
+
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const finalDateStr = targetDate.toLocaleDateString('en-GB', options);
+            
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const finalDayStr = dayNames[targetDate.getDay()];
+            
+            resultSpan.innerText = `${finalDateStr} | ${finalDayStr}`;
+        });
+
+        function clearInput() {
+            document.getElementById('day-input').value = "";
+            document.getElementById('result-text').innerText = "--";
+        }
+
+        function copyResult() {
+            const textToCopy = document.getElementById('result-text').innerText;
+            if (textToCopy && textToCopy !== "--") {
+                navigator.clipboard.writeText(textToCopy);
+                alert("Result copied successfully! 👍");
+            }
+        }
+    </script>
+</body>
+</html>
